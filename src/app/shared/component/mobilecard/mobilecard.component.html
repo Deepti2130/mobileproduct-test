@@ -1,0 +1,86 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4" *ngFor="let mobile of mobileData">
+        <div class="card-body"
+        [ngClass]="{
+          'notavail' : !mobile.isAvailable
+        }">
+          <div class="row">
+         <div class="col-md-3">
+          <!-- we apply the condition by 3 way
+           1)ngIf   -->
+          <!-- <img [src]="mobile.image" class="img-fluid"
+          [alt] = "mobile.name"
+          [title] =" mobile.name"
+          *ngIf="mobile.image else noImg"
+          > -->
+
+          <!-- 2) || operator -->
+          <!-- <img [src]="mobile.image || 'https://placehold.co/600x400/EEE/31343C'" class="img-fluid"
+          [alt] = "mobile.name"
+          [title] =" mobile.name"> -->
+
+          <!-- *ngIf="mobile.image else noImg -->
+
+          <!-- <ng-template #noImg>
+             <img src="https://placehold.co/600x400/EEE/31343C "class="img-fluid"
+            [alt] = "mobile.name"
+            [title] =" mobile.name"> -->
+          <!-- </ng-template>  -->
+
+          <!-- 3)ngIf by show the msg on UI -->
+          <div class="imgcontainer">
+          <img [src]="mobile.image"
+          class="img-fluid"
+          [alt] = "mobile.name"
+          [title] =" mobile.name"
+          *ngIf="mobile.image else noImg"
+            >
+          </div>
+
+          <ng-template #noImg>
+            <p class="noimgmsg text-muted">
+            product image is not available
+            </p>
+          </ng-template>
+         </div>
+
+
+         <div class="col-md-7">
+          <h3>
+            {{mobile.name}}
+            <small class="p-2"
+             [ngClass]="{
+              'bg-success':mobile. rating >= 4,
+              'bg-warning':mobile.rating >= 3 && mobile.rating < 4,
+              'bg-danger':mobile.rating < 3
+             }">
+              {{mobile.rating}}
+            </small>
+          </h3>
+         </div>
+
+         <div class="col-md-2">
+          <h4>
+            {{mobile.offerprice}}
+          </h4>
+          <small class="text-muted pricecss">
+            {{mobile.price}}
+
+          </small>
+          <strong class="d-block text-danger" *ngIf="mobile.noofitem < 10">
+            only {{mobile.noofitem}} left
+          </strong>
+         </div>
+        </div>
+      </div>
+
+      <div class="text-danger noproduct" *ngIf="!mobile.isAvailable">
+        Currently Unavailable
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
